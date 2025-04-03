@@ -1,4 +1,4 @@
-
+#pragma warning(disable: 5045)
 /**
  * Canonical implementation of Init/Update/Finalize for SHA-3 byte input.
  * Based on code from https://github.com/brainhub/SHA3IUF/
