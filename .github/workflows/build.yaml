@@ -6,13 +6,11 @@ on:
       - easy7zip-sf
       - e7z-sf-zstd
       - e7z-sf-without-zstd
-      - build-test
   pull_request:
     branches:
       - easy7zip-sf
       - e7z-sf-zstd
       - e7z-sf-without-zstd
-      - build-test
 
 jobs:
   build:
@@ -20,11 +18,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build project
         shell: cmd
-        run: ${{ '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Auxiliary\\Build\\vcvars64.bat" && build.cmd' }}
+        run: ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" && build.cmd' }}
 
       - name: Download and unpack Lang
         shell: cmd
@@ -35,7 +33,7 @@ jobs:
         run: ${{ 'cd out && COPY 7zipUninstall.exe Uninstall.exe && .\7z a -m0=LZMA -mx=9 install.7z Lang/ 7z.dll 7z.exe 7z.sfx 7zCon.sfx 7zFM.exe 7zG.exe 7-zip.dll Uninstall.exe License.txt && RENAME 7zipInstall.exe 7zipInstall.exe.bak && COPY /Y /B 7zipInstall.exe.bak + install.7z 7zipInstall.exe && DEL Uninstall.exe && DEL install.7z' }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Easy_7zip_Artifact
           path: |
